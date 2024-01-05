@@ -2,6 +2,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -11,26 +12,22 @@ body {
 
 .container {
   background-color: #cfcfcf;
-  margin: 0 auto;
-  max-width: 50%;
-  margin-top: 2%;
+  margin: 2% auto;
+  max-width: 80%;
   border-radius: 20px;
-  max-height: max-content;
-  padding-bottom: 30px;
-  box-shadow: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.title {
-  text-align: center;
-  color: #000;
-}
+.title,
 .error {
   text-align: center;
-  color: red;
+  color: #000;
 }
 
 .input_holder {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
@@ -38,15 +35,15 @@ body {
 
 input,
 button {
-  padding: 10px 20px;
-  background-color: #696969;
+  padding: 10px 15px;
+  background-color: #393232;
   color: #fff;
   outline: none;
   border: none;
 }
 
 input {
-  width: 200px;
+  width: 80%;
 }
 
 input::placeholder {
@@ -67,8 +64,9 @@ button:hover {
 
 .toDo {
   background-color: #696969;
-  padding: 10px 20px;
+  padding: 10px 15px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
@@ -97,7 +95,8 @@ button:hover {
 .popup {
   position: relative;
   background-color: #696969;
-  width: 400px;
+  width: 80%;
+  max-width: 400px;
   padding: 10px;
 }
 
@@ -121,6 +120,7 @@ button:hover {
 .popup__input_holder {
   margin-top: 30px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
   padding-bottom: 30px;
@@ -138,4 +138,26 @@ button:hover {
 
 .popup__input_holder button:hover {
   background-color: #c4c4c4;
+}
+
+/* Media Queries for responsiveness */
+
+@media screen and (max-width: 600px) {
+  .container {
+    max-width: 90%;
+  }
+
+  .input_holder {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .toDo {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .popup {
+    width: 90%;
+  }
 }

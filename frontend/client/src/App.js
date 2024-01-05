@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ToDo from "./components/ToDo";
 import axios from "axios";
-import { baseURL } from "./utils/constant";
+import constant from "./utils/constant.js";
 import Popup from "./components/Popup";
 
 const App = () => {
@@ -13,8 +13,9 @@ const App = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    console.log("env", constant.baseURL);
     axios
-      .get(`${baseURL}/get`)
+      .get(`${constant.baseURL}/get`)
       .then((res) => setToDos(res.data))
       .catch((err) => console.log(err));
   }, [updateUI]);
@@ -39,7 +40,7 @@ const App = () => {
       setError("Should Not empty");
     } else {
       axios
-        .post(`${baseURL}/save`, { toDo: input })
+        .post(`${constant.baseURL}/save`, { toDo: input })
         .then((res) => {
           console.log(res.data);
           setUpdateUI((prevState) => !prevState);

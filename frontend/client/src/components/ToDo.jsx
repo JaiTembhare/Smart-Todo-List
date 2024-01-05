@@ -2,11 +2,12 @@ import axios from "axios";
 import React from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
+import constant from "../utils/constant.js";
 import { baseURL } from "../utils/constant";
 
 const ToDo = ({ text, id, setUpdateUI, setShowPopup, setPopupContent }) => {
   const deleteTodo = () => {
-    axios.delete(`${baseURL}/delete/${id}`).then((res) => {
+    axios.delete(`${constant.baseURL}/delete/${id}`).then((res) => {
       console.log(res.data);
       setUpdateUI((prevState) => !prevState);
     });

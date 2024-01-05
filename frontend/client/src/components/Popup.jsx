@@ -1,19 +1,37 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
-import { baseURL } from "../utils/constant";
+import constant from "../utils/constant.js";
 
 const Popup = ({ setShowPopup, popupContent, setUpdateUI }) => {
   const [input, setInput] = useState(popupContent.text);
-
+  const [error, setError] = useState("");
   const updateToDo = () => {
-    axios
-      .put(`${baseURL}/update/${popupContent.id}`, { toDo: input })
-      .then((res) => {
-        console.log(res.data);
-        setUpdateUI((prevState) => !prevState);
-        setShowPopup(false);
-      });
+    if (input === "") {
+      setError("Should Not empty");
+    } else {
+      axios
+        .put(`${constant.baseURL}/update/${popupContent.id}`, { toDo: input })
+        .then((res) => {
+          console.log(res.data);
+          setUpdateUI((prevState) => !prevState);
+          setShowPopup(false);
+        });
+    }
+  };
+  const onChangeHandler = (e) => {
+    setInput(e.target.value);
+    if (input == "") {
+      setError("Should Not empty");
+    } else {
+      setError("");
+    }
+  };
+
+  const onBlurHandler = () => {
+    if (input === "") {
+      setError("Should Not empty");
+    }
   };
 
   return (
@@ -25,12 +43,14 @@ const Popup = ({ setShowPopup, popupContent, setUpdateUI }) => {
         <div className="popup__input_holder">
           <input
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={onChangeHandler}
             type="text"
+            onBlur={onBlurHandler}
             placeholder="Update ToDo..."
           />
           <button onClick={updateToDo}>Update</button>
         </div>
+        {error && <p className="error"> Should not empty!!</p>}
       </div>
     </div>
   );
